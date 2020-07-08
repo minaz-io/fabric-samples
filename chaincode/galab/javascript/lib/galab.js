@@ -10,104 +10,51 @@ class Galab extends Contract {
 
     async initLedger(ctx) {
         console.info('============= START : Initialize Ledger ===========');
-        const cars = [
+        const reports = ['P2020106380'];
+        const certificates = [
             {
-                color: 'blue',
-                make: 'Toyota',
-                model: 'Prius',
-                owner: 'Tomoko',
-            },
-            {
-                color: 'red',
-                make: 'Ford',
-                model: 'Mustang',
-                owner: 'Brad',
-            },
-            {
-                color: 'green',
-                make: 'Hyundai',
-                model: 'Tucson',
-                owner: 'Jin Soo',
-            },
-            {
-                color: 'yellow',
-                make: 'Volkswagen',
-                model: 'Passat',
-                owner: 'Max',
-            },
-            {
-                color: 'black',
-                make: 'Tesla',
-                model: 'S',
-                owner: 'Adriana',
-            },
-            {
-                color: 'purple',
-                make: 'Peugeot',
-                model: '205',
-                owner: 'Michel',
-            },
-            {
-                color: 'white',
-                make: 'Chery',
-                model: 'S22L',
-                owner: 'Aarav',
-            },
-            {
-                color: 'violet',
-                make: 'Fiat',
-                model: 'Punto',
-                owner: 'Pari',
-            },
-            {
-                color: 'indigo',
-                make: 'Tata',
-                model: 'Nano',
-                owner: 'Valeria',
-            },
-            {
-                color: 'brown',
-                make: 'Holden',
-                model: 'Barina',
-                owner: 'Shotaro',
+                sample: '2020106866',
+                client: 'Hempi Seeders',
+                order: 'Herr Jantzen',
+                lot: 'LDF5236954756DFA',
             },
         ];
 
-        for (let i = 0; i < cars.length; i++) {
-            cars[i].docType = 'car';
-            await ctx.stub.putState('CAR' + i, Buffer.from(JSON.stringify(cars[i])));
-            console.info('Added <--> ', cars[i]);
+        for (let i = 0; i < certificates.length; i++) {
+            certificates[i].docType = 'certificate';
+            await ctx.stub.putState(reports[i], Buffer.from(JSON.stringify(certificates[i])));
+            console.info('Added ', reports[i], ' <--> ', certificates[i]);
         }
         console.info('============= END : Initialize Ledger ===========');
     }
 
-    async queryCar(ctx, carNumber) {
-        const carAsBytes = await ctx.stub.getState(carNumber); // get the car from chaincode state
-        if (!carAsBytes || carAsBytes.length === 0) {
-            throw new Error(`${carNumber} does not exist`);
+    async queryCertificate(ctx, certificateNumber) {
+        const certificateAsBytes = await ctx.stub.getState(certificateNumber); // get the certificate from chaincode state
+        if (!certificateAsBytes || certificateAsBytes.length === 0) {
+            throw new Error(`${certificateNumber} does not exist`);
         }
-        console.log(carAsBytes.toString());
-        return carAsBytes.toString();
+        console.log(certificateAsBytes.toString());
+        return certificateAsBytes.toString();
     }
 
-    async createCar(ctx, carNumber, make, model, color, owner) {
-        console.info('============= START : Create Car ===========');
+    async createCertificate(ctx, certificateNumber, client, order, sample, lot) {
+        console.info('============= START : Create Certificate ===========');
 
-        const car = {
-            color,
-            docType: 'car',
-            make,
-            model,
-            owner,
+        const certificate = {
+            sample,
+            docType: 'certificate',
+            client,
+            order,
+            lot,
         };
 
-        await ctx.stub.putState(carNumber, Buffer.from(JSON.stringify(car)));
-        console.info('============= END : Create Car ===========');
+        await ctx.stub.putState(certificateNumber, Buffer.from(JSON.stringify(certificate)));
+        console.info('============= END : Create Certificate ===========');
     }
 
-    async queryAllCars(ctx) {
-        const startKey = 'CAR0';
-        const endKey = 'CAR999';
+    async queryAllCertificates(ctx) {
+        const startKey = 'P2020106380';
+        const endKey = 'P2020106380';
 
         const iterator = await ctx.stub.getStateByRange(startKey, endKey);
 
@@ -137,18 +84,18 @@ class Galab extends Contract {
         }
     }
 
-    async changeCarOwner(ctx, carNumber, newOwner) {
-        console.info('============= START : changeCarOwner ===========');
+    async changeCertificateOwner(ctx, certificateNumber, newOwner) {
+        console.info('============= START : changeCertificateOwner ===========');
 
-        const carAsBytes = await ctx.stub.getState(carNumber); // get the car from chaincode state
-        if (!carAsBytes || carAsBytes.length === 0) {
-            throw new Error(`${carNumber} does not exist`);
+        const certificateAsBytes = await ctx.stub.getState(certificateNumber); // get the certificate from chaincode state
+        if (!certificateAsBytes || certificateAsBytes.length === 0) {
+            throw new Error(`${certificateNumber} does not exist`);
         }
-        const car = JSON.parse(carAsBytes.toString());
-        car.owner = newOwner;
+        const certificate = JSON.parse(certificateAsBytes.toString());
+        certificate.client = newOwner;
 
-        await ctx.stub.putState(carNumber, Buffer.from(JSON.stringify(car)));
-        console.info('============= END : changeCarOwner ===========');
+        await ctx.stub.putState(certificateNumber, Buffer.from(JSON.stringify(certificate)));
+        console.info('============= END : changeCertificateOwner ===========');
     }
 
 }

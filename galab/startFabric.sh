@@ -143,11 +143,11 @@ JavaScript:
     node registerUser
 
   You can run the invoke application as follows. By default, the invoke application will
-  create a new car, but you can update the application to submit other transactions:
+  create a new certificate, but you can update the application to submit other transactions:
     node invoke
 
   You can run the query application as follows. By default, the query application will
-  return all cars, but you can update the application to evaluate other transactions:
+  return all certificates, but you can update the application to evaluate other transactions:
     node query
 
 TypeScript:
@@ -168,11 +168,11 @@ TypeScript:
     node dist/registerUser
 
   You can run the invoke application as follows. By default, the invoke application will
-  create a new car, but you can update the application to submit other transactions:
+  create a new certificate, but you can update the application to submit other transactions:
     node dist/invoke
 
   You can run the query application as follows. By default, the query application will
-  return all cars, but you can update the application to evaluate other transactions:
+  return all certificates, but you can update the application to evaluate other transactions:
     node dist/query
 
 Java:
@@ -185,9 +185,9 @@ Java:
 
   The test will invoke the sample client app which perform the following:
     - Enroll admin and user1 and import them into the wallet (if they don't already exist there)
-    - Submit a transaction to create a new car
-    - Evaluate a transaction (query) to return details of this car
-    - Submit a transaction to change the owner of this car
-    - Evaluate a transaction (query) to return the updated details of this car
+    - Submit a transaction to create a new certificate
+    - Evaluate a transaction (query) to return details of this certificate
+    - Submit a transaction to change the owner of this certificate
+    - Evaluate a transaction (query) to return the updated details of this certificate
 
 EOF

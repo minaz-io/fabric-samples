@@ -36,9 +36,9 @@ async function main() {
         const contract = network.getContract('galab');
 
         // Submit the specified transaction.
-        // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
-        // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR10', 'Dave')
-        await contract.submitTransaction('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom');
+        // createCertificate transaction - requires 5 argument, ex: ('createCertificate', 'T2020106380', 'Pi Seeders', 'Herr Juglas', '2020106868', 'LDF5236954756DFB')
+        // changeCertificateOwner transaction - requires 2 args , ex: ('changeCertificateOwner', 'T2020106380', 'Pi Seeders')
+        await contract.submitTransaction('createCertificate', 'T2020106380', 'Pi Seeders', 'Herr Juglas', '2020106868', 'LDF5236954756DFB');
         console.log('Transaction has been submitted');
 
         // Disconnect from the gateway.
