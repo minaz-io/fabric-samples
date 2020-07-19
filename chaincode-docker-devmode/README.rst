@@ -114,8 +114,8 @@ We'll leverage the CLI container to drive these calls.
 
 .. code:: bash
 
-  peer chaincode install -p chaincodedev/chaincode/chaincode_example02/go -n mycc -v 0
-  peer chaincode instantiate -n mycc -v 0 -c '{"Args":["init","a","100","b","200"]}' -C myc
+  peer chaincode install -p chaincode/galab/javascript -l node -n galab -v 0
+  peer chaincode instantiate -n galab -v 0 -c '{"Args":["initLedger"]}' -C myc
 
 Now issue an invoke to move ``10`` from ``a`` to ``b``.
 
